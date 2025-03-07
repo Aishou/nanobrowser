@@ -41,6 +41,13 @@ const manifest = withSidePanel({
   description: '__MSG_extensionDescription__',
   host_permissions: ['<all_urls>'],
   permissions: ['storage', 'scripting', 'tabs', 'activeTab', 'debugger'],
+  optional_permissions: ['activeTab', 'tabs'],
+  browser_specific_settings: {
+    gecko: {
+      id: 'your-extension-id@example.com',
+      strict_min_version: '42.0',
+    },
+  },
   options_page: 'options/index.html',
   background: {
     service_worker: 'background.iife.js',

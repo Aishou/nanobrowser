@@ -16,6 +16,7 @@ export const plannerOutputSchema = z.object({
   next_steps: z.string(),
   reasoning: z.string(),
   web_task: z.boolean(),
+  custom_openai_api_url: z.string().optional(), // P9d36
 });
 
 export type PlannerOutput = z.infer<typeof plannerOutputSchema>;

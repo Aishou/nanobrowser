@@ -15,6 +15,7 @@ import {
   sendKeysActionSchema,
   scrollToTextActionSchema,
   cacheContentActionSchema,
+  customOpenaiApiUrlSchema,
 } from './schemas';
 import { z } from 'zod';
 import { createLogger } from '@src/background/log';
@@ -343,6 +344,15 @@ export class ActionBuilder {
       }
     }, scrollToTextActionSchema);
     actions.push(scrollToText);
+
+    const customOpenaiApiUrl = new Action(async (input: z.infer<typeof customOpenaiApiUrlSchema.schema>) => {
+      const msg = `Custom OpenAI API URL set to: ${input.url}`;
+      this.context.emitEvent(Actors.NAVIGATOR, ExecutionState.ACT_START, msg);
+      this.context.options.customOpenaiApiUrl = input.url;
+      this.context.emitEvent(Actors.NAVIGATOR, ExecutionState.ACT_OK, msg);
+      return new ActionResult({ extractedContent: msg, includeInMemory: true });
+    }, customOpenaiApiUrlSchema);
+    actions.push(customOpenaiApiUrl);
 
     return actions;
   }

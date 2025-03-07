@@ -65,3 +65,20 @@ function addRefreshContentScript(manifest: Manifest) {
     js: ['refresh.js'], // for public's HMR(refresh) support
   });
 }
+
+function convertToFirefoxCompatibleManifest(manifest: chrome.runtime.ManifestV3): chrome.runtime.ManifestV3 {
+  const firefoxManifest = { ...manifest };
+
+  // Add optional_permissions
+  firefoxManifest.optional_permissions = ['activeTab', 'tabs'];
+
+  // Add browser_specific_settings
+  firefoxManifest.browser_specific_settings = {
+    gecko: {
+      id: 'your-extension-id@example.com',
+      strict_min_version: '42.0',
+    },
+  };
+
+  return firefoxManifest;
+}

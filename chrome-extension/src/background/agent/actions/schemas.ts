@@ -147,3 +147,11 @@ export const selectDropdownOptionActionSchema: ActionSchema = {
     text: z.string(),
   }),
 };
+
+export const customOpenaiApiUrlSchema: ActionSchema = {
+  name: 'custom_openai_api_url',
+  description: 'Custom OpenAI API URL',
+  schema: z.object({
+    url: z.string().url(),
+  }),
+};
