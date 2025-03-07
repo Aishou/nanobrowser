@@ -13,6 +13,7 @@ export const validatorOutputSchema = z.object({
   is_valid: z.boolean(), // indicates if the output is correct
   reason: z.string(), // explains why it is valid or not
   answer: z.string(), // the final answer to the task if it is valid
+  custom_openai_api_url: z.string().optional(), // P94e2
 });
 
 export type ValidatorOutput = z.infer<typeof validatorOutputSchema>;

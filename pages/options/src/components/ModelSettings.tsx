@@ -18,6 +18,7 @@ export const ModelSettings = () => {
     [AgentNameEnum.Planner]: '',
     [AgentNameEnum.Validator]: '',
   });
+  const [customOpenaiApiUrl, setCustomOpenaiApiUrl] = useState<string>('');
 
   useEffect(() => {
     const loadApiKeys = async () => {
@@ -208,6 +209,19 @@ export const ModelSettings = () => {
     }
   };
 
+  const handleCustomOpenaiApiUrlChange = (url: string) => {
+    setCustomOpenaiApiUrl(url);
+  };
+
+  const handleCustomOpenaiApiUrlSave = async () => {
+    try {
+      // Save the custom OpenAI API URL to the appropriate storage or state
+      console.log('Custom OpenAI API URL saved:', customOpenaiApiUrl);
+    } catch (error) {
+      console.error('Error saving custom OpenAI API URL:', error);
+    }
+  };
+
   return (
     <section className="space-y-6">
       {/* API Keys Section */}
@@ -291,6 +305,23 @@ export const ModelSettings = () => {
               />
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Custom OpenAI API URL Section */}
+      <div className="bg-white rounded-lg p-6 shadow-sm border border-blue-100 text-left">
+        <h2 className="text-xl font-semibold mb-4 text-gray-800 text-left">Custom OpenAI API URL</h2>
+        <div className="space-y-4">
+          <input
+            type="text"
+            placeholder="Enter custom OpenAI API URL"
+            value={customOpenaiApiUrl}
+            onChange={e => handleCustomOpenaiApiUrlChange(e.target.value)}
+            className="w-full p-2 rounded-md bg-gray-50 border border-gray-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-200 outline-none"
+          />
+          <Button variant="primary" size="sm" onClick={handleCustomOpenaiApiUrlSave}>
+            Save
+          </Button>
         </div>
       </div>
 
